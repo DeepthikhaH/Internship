@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nova | AI workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script type="importmap">
+      {"imports":{"@hotwired/stimulus":"https://unpkg.com/@hotwired/stimulus@3.2.2/dist/stimulus.js"}}
+    </script>
+  </head>
+  <body>
+    <main class="shell" data-controller="chat" data-chat-endpoint-value="{{ url_for('chat') }}">
+      <aside class="sidebar">
+        <div class="brand"><span class="brand-mark">N</span><span>NOVA</span></div>
+        <div class="sidebar-rule"></div>
+        <p class="eyebrow">Workspace</p>
+        <button class="new-chat" data-action="chat#reset"><span>+</span> New conversation</button>
+        <div class="sidebar-note">
+          <span class="status-dot"></span>
+          <div><strong>Local mode active</strong><small>Ready for your next idea</small></div>
+        </div>
+        <div class="sidebar-footer"><span>STIMULUS / PYTHON</span><span>v1.0</span></div>
+      </aside>
+
+      <section class="chat-panel">
+        <header class="chat-header">
+          <div><p class="eyebrow">Personal assistant</p><h1>Think out loud.</h1></div>
+          <div class="connection"><span class="status-dot"></span><span data-chat-target="mode">LOCAL ENGINE</span></div>
+        </header>
+
+        <div class="conversation" data-chat-target="messages" aria-live="polite">
+          <article class="message message-assistant welcome-message">
+            <div class="avatar">N</div>
+            <div class="message-content"><span class="message-label">NOVA · JUST NOW</span><p>Good morning. I’m Nova, a small AI workspace for big thoughts. What are we making today?</p><div class="suggestions"><button data-action="chat#suggest" data-prompt="Explain how this Stimulus app works">How does this work?</button><button data-action="chat#suggest" data-prompt="Give me a creative project idea">Surprise me</button></div></div>
+          </article>
+        </div>
+
+        <form class="composer" data-action="submit->chat#send">
+          <div class="composer-box"><textarea data-chat-target="input" data-action="keydown->chat#handleKeydown" placeholder="Ask Nova anything..." rows="1" aria-label="Message Nova"></textarea><button class="send-button" type="submit" aria-label="Send message"><span>↑</span></button></div>
+          <div class="composer-meta"><span>SHIFT + ENTER FOR NEW LINE</span><span>PRIVATE BY DESIGN</span></div>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
